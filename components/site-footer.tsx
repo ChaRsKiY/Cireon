@@ -21,36 +21,31 @@ export default function SiteFooter() {
             <p className="text-sm font-medium">Navigation</p>
             <ul className="text-sm text-muted-foreground grid gap-1">
               <li>
-                <Link href="/services" className="hover:underline">
+                <a href="#services" className="hover:underline">
                   Services
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/portfolio" className="hover:underline">
+                <a href="#portfolio" className="hover:underline">
                   Portfolio
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/blog" className="hover:underline">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:underline">
+                <a href="#about" className="hover:underline">
                   About
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/contacts" className="hover:underline">
+                <a href="#contact" className="hover:underline">
                   Contact
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
           <div className="space-y-2">
             <p className="text-sm font-medium">Social</p>
             <ul className="text-sm text-muted-foreground grid gap-1">
-              <li>
+              {/*<li>
                 <a href="https://github.com" className="hover:underline" target="_blank" rel="noreferrer">
                   GitHub
                 </a>
@@ -59,7 +54,7 @@ export default function SiteFooter() {
                 <a href="https://linkedin.com" className="hover:underline" target="_blank" rel="noreferrer">
                   LinkedIn
                 </a>
-              </li>
+              </li>*/}
               <li>
                 <a href="mailto:me@cireon.dev" className="hover:underline">
                   me@cireon.dev
