@@ -23,3 +23,36 @@ model ContactMessage {
   ipAddress String?
   userAgent String?
 }
+
+model ContactLead {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String
+  company   String?
+  brief     String
+  budget    String?
+  timeline  String?
+  source    String?  // e.g. "chatbot"
+  createdAt DateTime @default(now())
+  ipAddress String?
+  userAgent String?
+  sessionId String?  @db.ObjectId
+}
+
+model ChatSession {
+  id        String        @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  userIp    String?
+  userAgent String?
+  messages  ChatMessage[]
+}
+
+model ChatMessage {
+  id         String      @id @default(auto()) @map("_id") @db.ObjectId
+  role       String      // 'user' | 'assistant' | 'system' | 'tool'
+  content    String
+  createdAt  DateTime    @default(now())
+  sessionId  String      @db.ObjectId
+  session    ChatSession @relation(fields: [sessionId], references: [id])
+}

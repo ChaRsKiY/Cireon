@@ -12,6 +12,7 @@ import Industries from "@/components/sections/industries"
 import FAQ from "@/components/sections/faq"
 import WorldMap from "@/components/world-map"
 import ContactForm from "@/components/contact-form"
+import Chatbot from "@/components/chatbot"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
@@ -70,7 +71,7 @@ const works = [
   { 
     id: 3, 
     title: "Cireon Studio", 
-    tag: ["Web"], 
+    tag: ["Web", "AI"], 
     image: "/cireon-studio.png",
     description: "Digital studio landing page with modern design, animations and contact form integration"
   },
@@ -95,6 +96,7 @@ export default function HomePage() {
       <ScrollProgress />
       <PageTransition>
         <HeroMotion />
+        <Chatbot />
 
         <AnimatedSection>
           <div className="container mx-auto px-4 py-12 md:py-16">
@@ -306,7 +308,7 @@ export default function HomePage() {
               <div>
                 <h1 className="text-3xl md:text-4xl font-semibold">Contacts</h1>
                 <p className="text-muted-foreground mt-3">
-                  Fill out the form — we'll respond within 1‑2 business days. Or write to hello@cireon.dev
+                  Fill out the form — we'll respond within 1‑2 business days. Or write to me@cireon.dev
                 </p>
                 <div className="mt-6 space-y-2 text-sm">
                   <p>

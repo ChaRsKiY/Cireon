@@ -2,7 +2,7 @@
 const rateLimitStore = new Map<string, { count: number; resetTime: number }>()
 
 const WINDOW_MS = 15 * 60 * 1000 // 15 minutes
-const MAX_REQUESTS = 5
+const MAX_REQUESTS = 30 // allow ~25 prompts per 15 min
 
 export async function checkRateLimit(req: Request): Promise<{ success: boolean; remainingPoints: number }> {
   const forwarded = req.headers.get('x-forwarded-for')
