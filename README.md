@@ -51,10 +51,6 @@ A modern, responsive landing page for Cireon digital studio built with Next.js 1
    ```env
    # Database
    DATABASE_URL="mongodb://localhost:27017/cireon"
-   
-   # Rate limiting
-   RATE_LIMIT_WINDOW_MS=900000
-   RATE_LIMIT_MAX_REQUESTS=5
    ```
 
 4. **Set up the database**
@@ -179,8 +175,6 @@ The app can be deployed to any platform that supports Next.js:
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `DATABASE_URL` | MongoDB connection string | Required |
-| `RATE_LIMIT_WINDOW_MS` | Rate limit window in ms | 900000 (15 min) |
-| `RATE_LIMIT_MAX_REQUESTS` | Max requests per window | 5 |
 
 ## Scripts
 
