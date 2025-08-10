@@ -1,3 +1,5 @@
+"use client"
+
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
 import ScrollProgress from "@/components/scroll-progress"
@@ -12,8 +14,10 @@ import WorldMap from "@/components/world-map"
 import ContactForm from "@/components/contact-form"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { Brain, Code2, Smartphone, Palette, Workflow, CuboidIcon as Cube } from "lucide-react"
+import { useMemo, useState } from "react"
 
 const services = [
   { title: "Web development", icon: Code2, desc: "Next.js apps with strong UI, SEO and CWV." },
@@ -47,7 +51,44 @@ const detailedServices = [
   },
 ]
 
+const works = [
+  { 
+    id: 1, 
+    title: "Kids Only", 
+    tag: ["Web"], 
+    image: "/kids-only-app.png",
+    description: "Newsletter subscription platform with full admin panel and advanced email template editor"
+  },
+  { 
+    id: 2, 
+    title: "Goldlagerhaus", 
+    tag: ["Web"], 
+    image: "/goldlagerhaus-site.png",
+    description: "Corporate website for Goldlagerhaus company with modern design and e-commerce features",
+    link: "https://goldlagerhaus.com"
+  },
+  { 
+    id: 3, 
+    title: "Cireon Studio", 
+    tag: ["Web"], 
+    image: "/cireon-studio.png",
+    description: "Digital studio landing page with modern design, animations and contact form integration"
+  },
+  { 
+    id: 4, 
+    title: "CNotes", 
+    tag: ["Web", "Mobile"], 
+    image: "/cnotes-app.png",
+    description: "Web application for hairdressing salon with appointment booking and financial management system"
+  },
+]
+
+const tags = ["All", "Web", "Mobile", "3D", "AI"] as const
+
 export default function HomePage() {
+  const [activeTag, setActiveTag] = useState<(typeof tags)[number]>("All")
+  const filteredWorks = useMemo(() => works.filter((w) => (activeTag === "All" ? true : w.tag.includes(activeTag))), [activeTag])
+
   return (
     <>
       <SiteHeader />
@@ -128,11 +169,46 @@ export default function HomePage() {
 
         <AnimatedSection>
           <div id="portfolio" className="container mx-auto px-4 py-12 md:py-16">
-            <div className="flex items-end justify-between mb-6">
-              <h3 className="text-xl md:text-2xl font-semibold">Demo projects</h3>
-              <Link href="/portfolio" className="text-sm text-violet-600 hover:underline">
-                View all
-              </Link>
+            <h2 className="text-xl md:text-2xl font-semibold mb-6">Portfolio</h2>
+            <p className="text-muted-foreground mb-6">Select a category to see relevant projects.</p>
+            
+            <div className="flex flex-wrap gap-2 mb-6">
+              {tags.map((t) => (
+                <button
+                  key={t}
+                  onClick={() => setActiveTag(t)}
+                  className={cn(
+                    "px-3 py-1.5 rounded-full border text-sm",
+                    activeTag === t ? "bg-violet-600 text-white border-violet-600" : "hover:bg-accent",
+                  )}
+                >
+                  {t}
+                </button>
+              ))}
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {filteredWorks.map((w) => (
+                <div key={w.id} className="overflow-hidden rounded-xl border bg-card group">
+                  <img
+                    src={w.image || "/placeholder.svg"}
+                    alt={w.title}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition"
+                  />
+                  <div className="p-4">
+                    <div className="flex justify-between">
+                      <div>
+                        <p className="font-medium">{w.title}</p>
+                        <p className="text-xs text-muted-foreground mb-2">{w.tag.join(", ")}</p>
+                      </div>
+                      <div>
+                        {w.link && <Link href={w.link} className="text-sm text-muted-foreground">View project</Link>}
+                      </div>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-1">{w.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </AnimatedSection>

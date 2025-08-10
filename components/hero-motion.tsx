@@ -51,10 +51,10 @@ export default function HeroMotion() {
           </p>
           <div className="mt-6 flex items-center justify-center gap-3">
             <Button asChild className="bg-violet-600 hover:bg-violet-600/90 text-white">
-              <Link href="/services">Our services</Link>
+              <a href="#contact">Our services</a>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/portfolio">See work</Link>
+              <a href="#portfolio">See work</a>
             </Button>
           </div>
         </motion.div>

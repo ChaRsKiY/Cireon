@@ -36,24 +36,36 @@ export default function SiteHeader() {
         { id: "contact", selector: "#contact" },
       ]
 
-      const scrollPosition = window.scrollY + 100
+      const scrollPosition = window.scrollY + 200 // Offset from top
+      const documentHeight = document.documentElement.scrollHeight
+      const windowHeight = window.innerHeight
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i]
-        const element = document.querySelector(section.selector)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          const elementTop = rect.top + window.scrollY
-          
-          if (scrollPosition >= elementTop) {
-            setActiveSection(section.id)
-            break
+      let currentSection = "home"
+
+      // Special check for contact section (if we're near the bottom)
+      if (scrollPosition + windowHeight >= documentHeight - 100) {
+        currentSection = "contact"
+      } else {
+        // Regular section detection
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const section = sections[i]
+          const element = document.querySelector(section.selector)
+          if (element) {
+            const rect = element.getBoundingClientRect()
+            const elementTop = rect.top + window.scrollY
+            
+            if (scrollPosition >= elementTop) {
+              currentSection = section.id
+              break
+            }
           }
         }
       }
+
+      setActiveSection(currentSection)
     }
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     handleScroll() // Initial check
 
     return () => window.removeEventListener("scroll", handleScroll)
