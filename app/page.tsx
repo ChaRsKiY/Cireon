@@ -1,6 +1,3 @@
-"use client"
-
-import type { Metadata } from "next"
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
 import ScrollProgress from "@/components/scroll-progress"
@@ -17,7 +14,6 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { Brain, Code2, Smartphone, Palette, Workflow, CuboidIcon as Cube } from "lucide-react"
-import { useMemo, useState } from "react"
 
 const services = [
   { title: "Web development", icon: Code2, desc: "Next.js apps with strong UI, SEO and CWV." },
@@ -51,53 +47,7 @@ const detailedServices = [
   },
 ]
 
-const works = [
-  { id: 1, title: "AI Sales Copilot", tag: "AI", image: "/ai-copilot-ui.png" },
-  { id: 2, title: "E‑commerce 3D", tag: "3D", image: "/3d-product-viewer.png" },
-  { id: 3, title: "Fintech Web App", tag: "Web", image: "/placeholder.svg?height=600&width=900" },
-  { id: 4, title: "Travel Mobile", tag: "Mobile", image: "/placeholder.svg?height=600&width=900" },
-  { id: 5, title: "AR Configurator", tag: "3D", image: "/placeholder.svg?height=600&width=900" },
-  { id: 6, title: "Analytics Platform", tag: "Web", image: "/placeholder.svg?height=600&width=900" },
-]
-
-const tags = ["All", "Web", "Mobile", "3D", "AI"] as const
-
-const posts = [
-  {
-    title: "Animations that Speed Up UX",
-    date: "2025‑06‑21",
-    tag: "Design",
-    excerpt: "How to use micro-interactions and 3D without overloading the interface.",
-    image: "/placeholder.svg?height=540&width=900",
-  },
-  {
-    title: "R3F and Three.js in Production",
-    date: "2025‑05‑10",
-    tag: "3D",
-    excerpt: "Best practices for performance and lighting in web 3D.",
-    image: "/placeholder.svg?height=540&width=900",
-  },
-  {
-    title: "AI Features in Product in 2 Weeks",
-    date: "2025‑04‑04",
-    tag: "AI",
-    excerpt: "Scenarios, architecture and typical pitfalls of AI-API integration.",
-    image: "/placeholder.svg?height=540&width=900",
-  },
-]
-
-const team = Array.from({ length: 6 }).map((_, i) => ({
-  id: i + 1,
-  name: `Specialist #${i + 1}`,
-  role: "Design · Development · AI",
-  description: "We love clean code, clear UX and expressive animations.",
-  image: `/diverse-portrait.png?height=96&width=96&query=portrait+${i + 1}`
-}))
-
 export default function HomePage() {
-  const [activeTag, setActiveTag] = useState<(typeof tags)[number]>("All")
-  const filteredWorks = useMemo(() => works.filter((w) => (activeTag === "All" ? true : w.tag === activeTag)), [activeTag])
-
   return (
     <>
       <SiteHeader />

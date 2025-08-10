@@ -31,7 +31,7 @@ export default function HeroMotion() {
   const glow3 = useMotionTemplate`radial-gradient(700px 400px at 20% 80%, rgba(6,182,212,0.16), transparent 70%)`
 
   return (
-    <section className="relative w-full h-[88dvh] overflow-hidden">
+    <section className="relative w-full h-[100dvh] overflow-hidden">
       <motion.div aria-hidden="true" className="absolute inset-0" style={{ backgroundImage: glow1 }} />
       <motion.div aria-hidden="true" className="absolute inset-0" style={{ backgroundImage: glow2 }} />
       <motion.div aria-hidden="true" className="absolute inset-0" style={{ backgroundImage: glow3 }} />
