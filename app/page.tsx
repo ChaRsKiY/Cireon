@@ -6,6 +6,8 @@ import ScrollProgress from "@/components/scroll-progress"
 import PageTransition from "@/components/page-transition"
 import AnimatedSection from "@/components/animated-section"
 import HeroMotion from "@/components/hero-motion"
+import ScrollOrchestrator from "@/components/scroll-orchestrator"
+import LongScrollSections from "@/components/long-scroll-sections"
 import TechLogos from "@/components/tech-logos"
 import Stats from "@/components/sections/stats"
 import Industries from "@/components/sections/industries"
@@ -94,6 +96,7 @@ export default function HomePage() {
     <>
       <SiteHeader />
       <ScrollProgress />
+      <ScrollOrchestrator />
       <PageTransition>
         <HeroMotion />
         <Chatbot />
@@ -101,8 +104,8 @@ export default function HomePage() {
         <AnimatedSection>
           <div className="container mx-auto px-4 py-12 md:py-16">
             <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-2xl md:text-3xl font-semibold">We help tech and business grow</h2>
-              <p className="mt-3 text-muted-foreground">
+              <h2 className="text-2xl md:text-3xl font-semibold" data-reveal>We help tech and business grow</h2>
+              <p className="mt-3 text-muted-foreground" data-reveal>
                 Thoughtful design, solid architecture and expressive motion. Products that engage and perform.
               </p>
               <div className="mt-6 flex items-center justify-center gap-3">
@@ -116,6 +119,9 @@ export default function HomePage() {
             </div>
           </div>
         </AnimatedSection>
+
+        {/* Long storytelling sections with pins and parallax */}
+        <LongScrollSections />
 
         <AnimatedSection>
           <div id="services" className="container mx-auto px-4 py-12 md:py-16">
