@@ -38,7 +38,7 @@ export default function NotFound() {
           </Link>
         </motion.div>
         <motion.div
-          className="mt-10 mx-auto h-32 w-32 rounded-full bg-gradient-to-br from-violet-500/30 via-fuchsia-500/20 to-cyan-500/30 blur-2xl"
+          className="mt-10 mx-auto h-32 w-32 rounded-full bg-gradient-to-br from-primary/30 via-primary/20 to-primary/30 blur-2xl"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6 }}

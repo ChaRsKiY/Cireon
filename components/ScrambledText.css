@@ -1,0 +1,21 @@
+.text-block {
+  margin: 7vw;
+  max-width: 800px;
+  font-size: clamp(14px, 4vw, 32px);
+  color: var(--foreground);
+  word-wrap: break-word;
+  word-break: keep-all;
+  hyphens: auto;
+  line-height: 1.6;
+}
+
+.word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.char {
+  will-change: transform;
+  display: inline-block;
+  white-space: nowrap;
+}

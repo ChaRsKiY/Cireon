@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Check, Loader2, AlertCircle } from "lucide-react"
-import { contactFormSchema, type ContactFormData } from "@/lib/validations"
+import { contactFormSchema } from "@/lib/validations"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 
 export default function ContactForm() {
@@ -18,7 +18,6 @@ export default function ContactForm() {
     setError(null)
     setValidationErrors({})
 
-    // Client-side validation
     const data = {
       name: formData.get('name') as string,
       email: formData.get('email') as string,
@@ -58,7 +57,6 @@ export default function ContactForm() {
       }
 
       setDone(true)
-      // Reset form
       const form = document.querySelector('form') as HTMLFormElement
       if (form) form.reset()
     } catch (err) {
@@ -136,7 +134,7 @@ export default function ContactForm() {
         <Button 
           type="submit" 
           disabled={isPending || done} 
-          className="bg-violet-600 hover:bg-violet-600/90 text-white"
+          className="bg-primary hover:bg-primary/90 text-primary-foreground"
         >
           {isPending ? (
             <>

@@ -79,7 +79,7 @@ export default function Chatbot() {
       {!open && (
         <Button
           onClick={() => setOpen(true)}
-          className="fixed bottom-4 right-4 z-50 rounded-full bg-violet-600 hover:bg-violet-600/90 text-white shadow-lg w-14 h-14"
+          className="fixed bottom-4 right-4 z-50 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg w-14 h-14"
           size="icon"
           aria-label="Open Cireon AI chat"
         >
@@ -122,7 +122,7 @@ export default function Chatbot() {
                   key={i}
                   className={cn(
                     'text-sm p-2 rounded-md max-w-[85%]',
-                    m.role === 'user' ? 'ml-auto bg-violet-600 text-white' : 'bg-muted',
+                    m.role === 'user' ? 'ml-auto bg-primary text-primary-foreground' : 'bg-muted',
                   )}
                 >
                   {m.content}

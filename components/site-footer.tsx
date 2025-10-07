@@ -1,15 +1,12 @@
-import Link from "next/link"
-import { FaCode } from "react-icons/fa"
+import Logo from "./logo"
 
 export default function SiteFooter() {
   return (
     <footer className="border-t">
       <div className="container mx-auto px-4 py-10 grid gap-6 md:grid-cols-3">
         <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <div className="size-7 rounded-md bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white">
-              <FaCode className="size-4" />
-            </div>
+          <div className="flex items-center gap-2 h-6">
+            <Logo />
             <span className="text-lg font-semibold">Cireon</span>
           </div>
           <p className="text-sm text-muted-foreground">

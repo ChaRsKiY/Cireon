@@ -10,8 +10,11 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(54.1% 0.281 293.009);
   --primary-foreground: oklch(0.985 0 0);
+  --primary-alpha: oklch(54.1% 0.281 293.009 / 0.2);
+  --primary-hsl: 270 100% 60%;
+  --primary-rgb: 139 92 246;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -40,14 +43,17 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: #000;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: oklch(63.7% 0.237 25.331);
+  --primary-foreground: oklch(0.145 0 0);
+  --primary-alpha: oklch(63.7% 0.237 25.331 / 0.2);
+  --primary-hsl: 25 100% 60%;
+  --primary-rgb: 255 140 0;
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -56,7 +62,7 @@
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.269 0 0);
+  --border: oklch(0.4 0 0);
   --input: oklch(0.269 0 0);
   --ring: oklch(0.439 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
@@ -124,4 +130,39 @@
 
 body, html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  font-family: monospace;
+}
+
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* GPU acceleration for animations */
+[data-framer-motion] {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Optimize heavy components */
+.liquid-ether-container,
+.pixel-blast-container {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+/* Reduce repaints */
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
 }

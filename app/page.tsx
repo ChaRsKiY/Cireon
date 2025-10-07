@@ -2,25 +2,25 @@
 
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
-import ScrollProgress from "@/components/scroll-progress"
 import PageTransition from "@/components/page-transition"
 import AnimatedSection from "@/components/animated-section"
 import HeroMotion from "@/components/hero-motion"
-import ScrollOrchestrator from "@/components/scroll-orchestrator"
-import LongScrollSections from "@/components/long-scroll-sections"
-import TechLogos from "@/components/tech-logos"
-import Stats from "@/components/sections/stats"
+import ScrambleText from "@/components/ScrambledText"
 import Industries from "@/components/sections/industries"
 import FAQ from "@/components/sections/faq"
-import WorldMap from "@/components/world-map"
+import Earth3D from "@/components/earth-3d"
 import ContactForm from "@/components/contact-form"
 import Chatbot from "@/components/chatbot"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { Brain, Code2, Smartphone, Palette, Workflow, CuboidIcon as Cube } from "lucide-react"
 import { useMemo, useState } from "react"
+import CurvedLoop from "@/components/CurvedLoop"
+import SpotlightCard from "@/components/SpotlightCard"
+import { motion } from "framer-motion"
+import CountUp from "@/components/CountUp"
+import TiltedCard from "@/components/TiltedCard"
 
 const services = [
   { title: "Web development", icon: Code2, desc: "Next.js apps with strong UI, SEO and CWV." },
@@ -73,7 +73,7 @@ const works = [
   { 
     id: 3, 
     title: "Cireon Studio", 
-    tag: ["Web", "AI"], 
+    tag: ["Web", "AI", "3D"], 
     image: "/cireon-studio.png",
     description: "Digital studio landing page with modern design, animations and contact form integration"
   },
@@ -95,136 +95,323 @@ export default function HomePage() {
   return (
     <>
       <SiteHeader />
-      <ScrollProgress />
-      <ScrollOrchestrator />
       <PageTransition>
         <HeroMotion />
+
         <Chatbot />
 
+        {/* Hero Section with Animated Text */}
         <AnimatedSection>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-2xl md:text-3xl font-semibold" data-reveal>We help tech and business grow</h2>
-              <p className="mt-3 text-muted-foreground" data-reveal>
-                Thoughtful design, solid architecture and expressive motion. Products that engage and perform.
-              </p>
-              <div className="mt-6 flex items-center justify-center gap-3">
-                <Button asChild className="bg-violet-600 hover:bg-violet-600/90 text-white">
-                  <a href="#contact">Start a project</a>
-                </Button>
-                <Button asChild variant="outline">
-                  <a href="#contact">Contact us</a>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
+          <div className="px-4 py-20 text-center w-full flex justify-center items-center flex-col">
+              <CurvedLoop marqueeText="We help tech and business grow" className="w-full" />
 
-        {/* Long storytelling sections with pins and parallax */}
-        <LongScrollSections />
-
-        <AnimatedSection>
-          <div id="services" className="container mx-auto px-4 py-12 md:py-16">
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">What we do</h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {services.map((s, i) => (
-                <Link key={i} href="/services" className="group">
-                  <div
-                    className="relative overflow-hidden rounded-xl border bg-card p-5 shadow-sm transition 
-                    hover:shadow-xl hover:-translate-y-0.5"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-fuchsia-500/0 via-violet-500/0 to-cyan-500/0 group-hover:from-fuchsia-500/5 group-hover:via-violet-500/5 group-hover:to-cyan-500/5 transition" />
-                    <s.icon className="size-6 text-violet-600 mb-3" />
-                    <p className="font-medium">{s.title}</p>
-                    <p className="text-sm text-muted-foreground">{s.desc}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">How we work</h3>
-            <ol className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {[
-                ["Analysis", "Goals and audience."],
-                ["Design", "Prototypes and visual language."],
-                ["Development", "Frontend, server and data."],
-                ["Testing", "Unit, integration and UX."],
-                ["Launch", "Release and analytics."],
-                ["Growth", "Optimization and A/B."],
-              ].map((step, i) => (
-                <li key={i} className="relative rounded-xl border bg-card p-4">
-                  <div className="absolute -top-3 -left-3 size-8 rounded-full bg-violet-600 text-white text-sm grid place-items-center">
-                    {i + 1}
-                  </div>
-                  <p className="font-medium">{step[0]}</p>
-                  <p className="text-xs text-muted-foreground mt-1">{step[1]}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">Our tech</h3>
-            <TechLogos />
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div id="portfolio" className="container mx-auto px-4 py-12 md:py-16">
-            <h2 className="text-xl md:text-2xl font-semibold mb-6">Portfolio</h2>
-            <p className="text-muted-foreground mb-6">Select a category to see relevant projects.</p>
-            
-            <div className="flex flex-wrap gap-2 mb-6">
-              {tags.map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setActiveTag(t)}
-                  className={cn(
-                    "px-3 py-1.5 rounded-full border text-sm",
-                    activeTag === t ? "bg-violet-600 text-white border-violet-600" : "hover:bg-accent",
-                  )}
+               <ScrambleText radius={100}
+                 duration={1.2}
+                 speed={0.5}
+                 scrambleChars={".:."} className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed"
                 >
-                  {t}
-                </button>
-              ))}
-            </div>
+                  Thoughtful design, solid architecture and expressive motion. Products that engage and perform.
+               </ScrambleText>
+          </div>
+        </AnimatedSection>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filteredWorks.map((w) => (
-                <div key={w.id} className="overflow-hidden rounded-xl border bg-card group">
-                  <img
-                    src={w.image || "/placeholder.svg"}
-                    alt={w.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition"
-                  />
-                  <div className="p-4">
-                    <div className="flex justify-between">
-                      <div>
-                        <p className="font-medium">{w.title}</p>
-                        <p className="text-xs text-muted-foreground mb-2">{w.tag.join(", ")}</p>
-                      </div>
-                      <div>
-                        {w.link && <Link href={w.link} className="text-sm text-muted-foreground">View project</Link>}
-                      </div>
+        {/* Services Grid with Modern Cards */}
+        <AnimatedSection>
+          <div className="container mx-auto px-4 py-16">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+              <p className="text-muted-foreground text-lg">What we do best</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
+                <div className="p-8 h-full flex flex-col">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <Code2 className="w-8 h-8 text-primary" />
                     </div>
-                    <p className="text-sm text-muted-foreground mb-1">{w.description}</p>
+                    <h3 className="text-2xl font-bold">Web Development</h3>
+                  </div>
+                  <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                    Next.js applications with modern UI, SEO optimization and excellent Core Web Vitals
+                  </p>
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary" size="md">Next.js</Badge>
+                      <Badge variant="secondary" size="md">React</Badge>
+                      <Badge variant="secondary" size="md">TypeScript</Badge>
+                    </div>
                   </div>
                 </div>
-              ))}
+              </SpotlightCard>
+              
+              <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
+                <div className="p-8 h-full flex flex-col">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <Smartphone className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold">Mobile Apps</h3>
+                  </div>
+                  <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                    Cross-platform mobile applications with native feel and high performance
+                  </p>
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary" size="md">React Native</Badge>
+                      <Badge variant="secondary" size="md">Flutter</Badge>
+                      <Badge variant="secondary" size="md">iOS/Android</Badge>
+                    </div>
+                  </div>
+                </div>
+              </SpotlightCard>
+              
+              <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
+                <div className="p-8 h-full flex flex-col">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <Brain className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold">AI Integration</h3>
+                  </div>
+                  <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                    AI integration, chatbots, generative content and business process automation
+                  </p>
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary" size="md">OpenAI</Badge>
+                      <Badge variant="secondary" size="md">Machine Learning</Badge>
+                      <Badge variant="secondary" size="md">Automation</Badge>
+                    </div>
+                  </div>
+                </div>
+              </SpotlightCard>
+              
+              <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
+                <div className="p-8 h-full flex flex-col">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <Palette className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold">UI/UX Design</h3>
+                  </div>
+                  <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                    User research, prototyping and design system creation
+                  </p>
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary" size="md">Figma</Badge>
+                      <Badge variant="secondary" size="md">Prototyping</Badge>
+                      <Badge variant="secondary" size="md">Design Systems</Badge>
+                    </div>
+                  </div>
+                </div>
+              </SpotlightCard>
+              
+              <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
+                <div className="p-8 h-full flex flex-col">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <Cube className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold">3D & Motion</h3>
+                  </div>
+                  <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                    Creative transitions, micro-interactions and 3D elements for web
+                  </p>
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary" size="md">Three.js</Badge>
+                      <Badge variant="secondary" size="md">Framer Motion</Badge>
+                      <Badge variant="secondary" size="md">WebGL</Badge>
+                    </div>
+                  </div>
+                </div>
+              </SpotlightCard>
+              
+              <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
+                <div className="p-8 h-full flex flex-col">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                      <Workflow className="w-8 h-8 text-primary" />
+                    </div>
+                    <h3 className="text-2xl font-bold">Automation</h3>
+                  </div>
+                  <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                    Integrations, pipelines and internal tools for workflow optimization
+                  </p>
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="secondary" size="md">APIs</Badge>
+                      <Badge variant="secondary" size="md">Pipelines</Badge>
+                      <Badge variant="secondary" size="md">DevOps</Badge>
+                    </div>
+                  </div>
+                </div>
+              </SpotlightCard>
             </div>
           </div>
         </AnimatedSection>
 
+        {/* Stats Section */}
         <AnimatedSection>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">Numbers and results</h3>
-            <Stats />
+          <div className="container mx-auto px-4 py-20">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">By the numbers</h2>
+              <p className="text-muted-foreground text-lg">Our focus is long-term value — measurable growth and satisfied clients</p>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+                  <CountUp to={10} onStart={() => {}} onEnd={() => {}} />
+                  <span className="text-2xl">+</span>
+                </div>
+                <p className="text-muted-foreground">Projects Delivered</p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+                  <CountUp to={98} onStart={() => {}} onEnd={() => {}} />
+                  <span className="text-2xl">%</span>
+                </div>
+                <p className="text-muted-foreground">Client Satisfaction</p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+                  <CountUp to={5} onStart={() => {}} onEnd={() => {}} />
+                  <span className="text-2xl">+</span>
+                </div>
+                <p className="text-muted-foreground">Years Experience</p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="text-center"
+              >
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
+                  <CountUp to={24} onStart={() => {}} onEnd={() => {}} />
+                  <span className="text-2xl">h</span>
+                </div>
+                <p className="text-muted-foreground">Average Response Time</p>
+              </motion.div>
+            </div>
+          </div>
+        </AnimatedSection>
+
+        {/* CTA Section */}
+        <AnimatedSection>
+          <div className="container mx-auto px-4 py-20">
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-3xl p-12 md:p-16"
+              >
+                <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                  Ready to build something amazing?
+                </h2>
+                <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                  Let's discuss your project and create something extraordinary together.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button asChild size="lg" className="text-lg px-8 py-6">
+                  <a href="#contact">Start a project</a>
+                </Button>
+                  <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6">
+                    <a href="#contact">Schedule a call</a>
+                </Button>
+              </div>
+              </motion.div>
+            </div>
+          </div>
+        </AnimatedSection>
+
+        {/* Portfolio Section */}
+        <AnimatedSection>
+          <div id="portfolio" className="container mx-auto px-4 py-20">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Our work</h2>
+              <p className="text-muted-foreground text-lg">Select a category to see relevant projects</p>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-3 mb-12">
+              {tags.map((t) => (
+                <Button key={t} onClick={() => setActiveTag(t)} variant={activeTag === t ? "default" : "outline"} size="lg">
+                  {t}
+                </Button>
+              ))}
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+              {filteredWorks.map((w, index) => (
+                <motion.div
+                key={w.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group"
+              >
+                <div className="overflow-hidden rounded-2xl border bg-card group-hover:shadow-xl transition-all duration-300 group-hover:border-primary/50">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={w.image || "/placeholder.svg"}
+                      alt={w.title}
+                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="flex flex-wrap gap-2">
+                        {w.tag.map((tag) => (
+                          <Badge key={tag} variant="secondary">
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-6 border-t border-border group-hover:border-primary/50 transition-colors">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{w.title}</h3>
+                      {w.link && (
+                        <Link 
+                          href={w.link} 
+                          className="text-primary hover:text-primary/80 transition-colors"
+                        >
+                          <motion.div
+                            whileHover={{ x: 5 }}
+                            className="flex items-center gap-1"
+                          >
+                            View project
+                            <span className="text-sm">→</span>
+                          </motion.div>
+                        </Link>
+                      )}
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">{w.description}</p>
+                  </div>
+                </div>
+              </motion.div>
+              ))}
+            </div>
           </div>
         </AnimatedSection>
 
@@ -235,76 +422,10 @@ export default function HomePage() {
           </div>
         </AnimatedSection>
 
-        {/* <AnimatedSection>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">Testimonials</h3>
-            <Testimonials />
-          </div>
-        </AnimatedSection> */}
-
         <AnimatedSection>
           <div className="container mx-auto px-4 py-12 md:py-16">
             <h3 className="text-xl md:text-2xl font-semibold mb-6">FAQ</h3>
             <FAQ />
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div id="about" className="container mx-auto px-4 py-12 md:py-16">
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-2xl md:text-3xl font-semibold">About us</h2>
-              <p className="text-muted-foreground mt-3">
-                Cireon — studio where design meets engineering. We create digital experiences with a focus on
-                speed, stability and aesthetics.
-              </p>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <div className="grid md:grid-cols-2 gap-6">
-              <img
-                src="/cireon-studio.png"
-                alt="Early snapshot of cireon.dev website"
-                className="rounded-xl border object-cover w-full h-72"
-              />
-              <div className="rounded-xl border p-6 bg-card">
-                <h2 className="font-medium mb-2">Philosophy</h2>
-                <p className="text-sm text-muted-foreground">
-                  Our approach is meaning, simplicity and expressiveness. We design intuitive interfaces and enhance them
-                  with animations and 3D elements when it increases the product value.
-                </p>
-                <ul className="mt-4 text-sm grid gap-2 list-disc pl-5">
-                  <li>Partnership and transparency</li>
-                  <li>Reliable architecture and DX</li>
-                  <li>Measureability and experiments</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h2 className="text-xl md:text-2xl font-semibold mb-6">Detailed services</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {detailedServices.map((s, i) => (
-                <div key={i} className="overflow-hidden rounded-xl border bg-card">
-                  <img src={s.img || "/placeholder.svg"} alt={s.title} className="w-full h-48 object-cover" />
-                  <div className="p-5">
-                    <h3 className="font-medium">{s.title}</h3>
-                    <div className="mt-3 flex flex-wrap gap-2">
-                      {s.points.map((p, j) => (
-                        <Badge key={j} variant="secondary">
-                          {p}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </AnimatedSection>
 
@@ -328,7 +449,7 @@ export default function HomePage() {
                   </p>
                 </div>
                 <div className="mt-6">
-                  <WorldMap />
+                  <Earth3D />
                 </div>
               </div>
               <div className="rounded-xl border bg-card p-6 h-full flex flex-col">

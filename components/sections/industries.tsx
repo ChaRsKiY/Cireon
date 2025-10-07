@@ -14,10 +14,9 @@ export default function Industries() {
         return (
           <motion.div
             key={i}
-            whileHover={{ y: -4, scale: 1.02 }}
             className="rounded-xl border bg-card p-5 flex items-start gap-3"
           >
-            <Icon className="size-5 text-violet-600 mt-0.5" />
+            <Icon className="size-5 text-primary mt-0.5" />
             <div>
               <p className="font-medium">{name}</p>
               <p className="text-sm text-muted-foreground">Polished UI, high CWV and secure architecture.</p>

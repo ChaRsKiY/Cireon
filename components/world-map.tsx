@@ -26,8 +26,8 @@ export default function WorldMap() {
           transition={{ delay: i * 0.1, type: "spring", stiffness: 200, damping: 12 }}
         >
           <div className="relative">
-            <span className="block size-3 rounded-full bg-violet-600 ring-2 ring-white/80 dark:ring-black/50 relative">
-              <span className="absolute w-12 inset-0 left-0 top-0 rounded-full bg-violet-500/30 animate-ping aspect-square" aria-hidden="true" />
+            <span className="block size-3 rounded-full bg-primary ring-2 ring-white/80 dark:ring-black/50 relative">
+              <span className="absolute w-12 inset-0 left-0 top-0 rounded-full bg-primary/30 animate-ping aspect-square" aria-hidden="true" />
             </span>
           </div>
           <div className="mt-1 text-xs px-2 py-1 rounded bg-background/80 border shadow-sm">{m.label}</div>
