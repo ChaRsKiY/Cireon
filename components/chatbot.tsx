@@ -6,6 +6,9 @@ import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { X, MessageSquare } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import Logo from './logo'
 
 type ChatItem = { role: 'user' | 'assistant'; content: string }
 
@@ -96,7 +99,7 @@ export default function Chatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-            className="fixed bottom-4 right-4 z-50 rounded-xl border bg-card shadow-xl flex flex-col"
+            className="fixed bottom-4 right-4 z-50 rounded-3xl border bg-card shadow-xl flex flex-col"
             style={{
               width: Math.min(size.w, typeof window !== 'undefined' ? window.innerWidth * 0.92 : size.w),
               height: Math.min(size.h, typeof window !== 'undefined' ? window.innerHeight * 0.8 : size.h),
@@ -105,7 +108,10 @@ export default function Chatbot() {
             aria-label="Cireon AI chat"
           >
             <div className="p-3 border-b flex items-center justify-between">
-              <div className="font-medium">Cireon AI</div>
+              <div className="flex items-center gap-2 h-5 justify-center">
+                <Logo />
+                <div className="font-bold">Cireon AI</div>
+              </div>
               <Button variant="ghost" size="icon" onClick={() => setOpen(false)} aria-label="Close chat">
                 <X className="size-4" />
               </Button>
@@ -121,11 +127,36 @@ export default function Chatbot() {
                 <div
                   key={i}
                   className={cn(
-                    'text-sm p-2 rounded-md max-w-[85%]',
+                    'text-sm p-3 rounded-md max-w-[85%]',
                     m.role === 'user' ? 'ml-auto bg-primary text-primary-foreground' : 'bg-muted',
                   )}
                 >
-                  {m.content}
+                  {m.role === 'user' ? (
+                    m.content
+                  ) : (
+                    <div className="prose prose-sm max-w-none prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-em:text-foreground prose-ul:text-foreground prose-ol:text-foreground prose-li:text-foreground prose-code:text-foreground prose-pre:text-foreground prose-blockquote:text-foreground prose-a:text-primary hover:prose-a:text-primary/80">
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                          ul: ({ children }) => <ul className="mb-2 last:mb-0 pl-4 space-y-1">{children}</ul>,
+                          ol: ({ children }) => <ol className="mb-2 last:mb-0 pl-4 space-y-1">{children}</ol>,
+                          li: ({ children }) => <li className="text-sm">{children}</li>,
+                          strong: ({ children }) => <strong className="font-semibold">{children}</strong>,
+                          em: ({ children }) => <em className="italic">{children}</em>,
+                          code: ({ children }) => <code className="bg-muted-foreground/10 px-1 py-0.5 rounded text-xs font-mono">{children}</code>,
+                          pre: ({ children }) => <pre className="bg-muted-foreground/10 p-2 rounded text-xs font-mono overflow-x-auto mb-2">{children}</pre>,
+                          blockquote: ({ children }) => <blockquote className="border-l-2 border-muted-foreground/20 pl-3 italic mb-2">{children}</blockquote>,
+                          a: ({ href, children }) => <a href={href} className="underline hover:no-underline" target="_blank" rel="noopener noreferrer">{children}</a>,
+                          h1: ({ children }) => <h1 className="text-lg font-bold mb-2">{children}</h1>,
+                          h2: ({ children }) => <h2 className="text-base font-bold mb-2">{children}</h2>,
+                          h3: ({ children }) => <h3 className="text-sm font-bold mb-1">{children}</h3>,
+                        }}
+                      >
+                        {m.content}
+                      </ReactMarkdown>
+                    </div>
+                  )}
                 </div>
               ))}
               {loading && <div className="text-xs text-muted-foreground">Thinking…</div>}
@@ -143,7 +174,7 @@ export default function Chatbot() {
               </Button>
             </div>
 
-            {/* Resize handle (top-left corner, rounded L-shape) */}
+            {/* Resize handle (top-left corner, outside) */}
             <div
               onMouseDown={(e) => {
                 e.preventDefault()
@@ -169,14 +200,19 @@ export default function Chatbot() {
                 window.addEventListener('mousemove', onMove)
                 window.addEventListener('mouseup', onUp)
               }}
-              className="absolute top-0.5 left-0.5 w-5 h-5 cursor-nw-resize"
+              className="absolute -top-2 -left-2 w-9 h-9 cursor-nw-resize group"
               aria-label="Resize chat"
               title="Resize"
             >
-              {/* Vertical bar */}
-              <div className="absolute left-1 top-1 h-3 w-[3px] rounded-full bg-muted-foreground/50" />
-              {/* Horizontal bar */}
-              <div className="absolute left-1 top-1 w-3 h-[3px] rounded-full bg-muted-foreground/50" />
+              {/* Single curved line (SVG arc following the corner radius) */}
+              <svg
+                className="absolute inset-0 pointer-events-none text-muted-foreground/40 group-hover:text-muted-foreground/60 transition-colors duration-200"
+                viewBox="0 0 30 30"
+                fill="none"
+              >
+                {/* Arc from top-right to bottom-left (quarter circle) */}
+                <path d="M 24 0 A 24 24 0 0 0 0 24" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+              </svg>
             </div>
           </motion.div>
         )}

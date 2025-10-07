@@ -21,10 +21,7 @@ function LoadingScreen() {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center"
-      style={{
-        background: theme === 'dark' ? 'hsl(var(--background))' : 'hsl(var(--background))'
-      }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-background"
       initial={{ opacity: 1 }}
       animate={{ opacity: isVisible ? 1 : 0 }}
       exit={{ opacity: 0 }}
@@ -63,20 +60,17 @@ export default function PageTransition({ children }: PropsWithChildren) {
   const [isTransitioning, setIsTransitioning] = useState(false)
 
   useEffect(() => {
-    // Показываем загрузку только при смене страницы
     if (pathname) {
       setIsTransitioning(true)
       setIsLoading(true)
 
-      // Минимальное время загрузки - 1 секунда
       const minTimer = setTimeout(() => {
         setIsLoading(false)
       }, 1000)
 
-      // Проверяем загрузку контента
       const checkContentLoaded = () => {
-        // Проверяем загрузку изображений
         const images = document.querySelectorAll('img')
+        console.log(images)
         const imagePromises = Array.from(images).map(img => {
           if (img.complete) return Promise.resolve()
           return new Promise(resolve => {
@@ -85,19 +79,15 @@ export default function PageTransition({ children }: PropsWithChildren) {
           })
         })
 
-        // Проверяем загрузку шрифтов
         const fontPromise = document.fonts ? document.fonts.ready : Promise.resolve()
 
-        // Ждем загрузки всех ресурсов
         Promise.all([...imagePromises, fontPromise]).then(() => {
-          // Дополнительная задержка для плавности
           setTimeout(() => {
             setIsTransitioning(false)
-          }, 200)
+          }, 100)
         })
       }
 
-      // Небольшая задержка для проверки контента
       const contentTimer = setTimeout(checkContentLoaded, 100)
 
       return () => {
@@ -113,6 +103,32 @@ export default function PageTransition({ children }: PropsWithChildren) {
         {isLoading && <LoadingScreen />}
       </AnimatePresence>
       
+      {/* Фон, который исчезает от краев к центру */}
+      <AnimatePresence>
+        {isTransitioning && (
+          <motion.div
+            className="fixed inset-0 z-40 bg-background"
+            initial={{ 
+              clipPath: "circle(150% at 50% 50%)"
+            }}
+            animate={{ 
+              clipPath: "circle(0% at 50% 50%)",
+              transition: { 
+                duration: 0.8,
+                delay: 0.2,
+                ease: [0.22, 1, 0.36, 1] 
+              }
+            }}
+            exit={{ 
+              opacity: 0,
+              transition: { 
+                duration: 0.3
+              }
+            }}
+          />
+        )}
+      </AnimatePresence>
+      
       <AnimatePresence mode="wait">
         <motion.main
           key={pathname}
@@ -121,7 +137,7 @@ export default function PageTransition({ children }: PropsWithChildren) {
             opacity: 1,
             transition: { 
               duration: 0.6, 
-              delay: isTransitioning ? 0.5 : 0,
+              delay: 0,
               ease: [0.22, 1, 0.36, 1] 
             }
           }}

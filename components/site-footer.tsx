@@ -29,7 +29,7 @@ export default function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="#about" className="hover:underline">
+                <Link href="#stats" className="hover:underline">
                   About
                 </Link>
               </li>

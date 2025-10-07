@@ -13,8 +13,8 @@ import { motion, AnimatePresence } from "framer-motion"
 const links = [
   { href: "/", label: "Home" },
   { href: "#services", label: "Services" },
+  { href: "#stats", label: "About" },
   { href: "#portfolio", label: "Portfolio" },
-  { href: "#about", label: "About" },
   { href: "#contact", label: "Contact" },
 ]
 
@@ -34,7 +34,7 @@ export default function SiteHeader() {
         { id: "home", selector: "body" },
         { id: "services", selector: "#services" },
         { id: "portfolio", selector: "#portfolio" },
-        { id: "about", selector: "#about" },
+        { id: "stats", selector: "#stats" },
         { id: "contact", selector: "#contact" },
       ]
 

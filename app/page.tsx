@@ -20,69 +20,47 @@ import CurvedLoop from "@/components/CurvedLoop"
 import SpotlightCard from "@/components/SpotlightCard"
 import { motion } from "framer-motion"
 import CountUp from "@/components/CountUp"
-
-const services = [
-  { title: "Web development", icon: Code2, desc: "Next.js apps with strong UI, SEO and CWV." },
-  { title: "Mobile apps", icon: Smartphone, desc: "Cross‑platform with native feel." },
-  { title: "UI/UX design", icon: Palette, desc: "Research, prototypes and design systems." },
-  { title: "AI/ML integrations", icon: Brain, desc: "Generative AI, chatbots and automation." },
-  { title: "Motion design", icon: Cube, desc: "Creative transitions and micro‑interactions." },
-  { title: "Automation", icon: Workflow, desc: "Integrations, pipelines, internal tools." },
-]
-
-const detailedServices = [
-  {
-    title: "Web Products on Next.js",
-    points: ["App Router", "SSR/SSG/ISR", "Animations & 3D", "Core Web Vitals Optimization"],
-    img: "/nextjs-webapp-ui.png",
-  },
-  {
-    title: "Mobile Applications",
-    points: ["Cross-platform", "High Performance", "Native Feel"],
-    img: "/mobile-app-ui.png",
-  },
-  {
-    title: "AI/ML Integrations",
-    points: ["Chatbots", "Content Generation", "Recommendation Systems"],
-    img: "/ai-integration.png",
-  },
-  {
-    title: "3D and AR",
-    points: ["Configurators", "Interactive Scenes", "WebAR"],
-    img: "/threejs-webgl-3d.png",
-  },
-]
+import Image from "next/image"
 
 const works = [
   { 
     id: 1, 
-    title: "Kids Only", 
+    title: "Gallery Slansky", 
     tag: ["Web"], 
-    image: "/kids-only-app.png",
-    description: "Newsletter subscription platform with full admin panel and advanced email template editor"
+    image: "/gallery-slansky.png",
+    description: "Gallery ecommerce website for Markus Slansky with modern design, animations and shop features",
+    link: "https://galerieslansky.com/"
   },
   { 
     id: 2, 
-    title: "Goldlagerhaus", 
-    tag: ["Web"], 
-    image: "/goldlagerhaus-site.png",
-    description: "Corporate website for Goldlagerhaus company with modern design and e-commerce features",
-    link: "https://goldlagerhaus.com"
-  },
-  { 
-    id: 3, 
     title: "Cireon Studio", 
     tag: ["Web", "AI", "3D"], 
     image: "/cireon-studio.png",
     description: "Digital studio landing page with modern design, animations and contact form integration"
   },
   { 
+    id: 3, 
+    title: "Kids Only", 
+    tag: ["Web"], 
+    image: "/kids-only-app.png",
+    description: "Newsletter subscription platform with full admin panel and advanced email template editor"
+  },
+  { 
     id: 4, 
+    title: "Goldlagerhaus", 
+    tag: ["Web"], 
+    image: "/goldlagerhaus-site.png",
+    description: "Corporate website for Goldlagerhaus company with modern design and e-commerce features",
+    link: "https://goldlagerhaus.com"
+  },
+  
+  { 
+    id: 5, 
     title: "CNotes", 
     tag: ["Web", "Mobile"], 
     image: "/cnotes-app.png",
     description: "Web application for hairdressing salon with appointment booking and financial management system"
-  }
+  },
 ]
 
 const tags = ["All", "Web", "Mobile", "3D", "AI"] as const
@@ -117,7 +95,7 @@ export default function HomePage() {
 
         {/* Services Grid with Modern Cards */}
         <AnimatedSection>
-          <section className="container mx-auto px-4 py-16" aria-labelledby="services-heading">
+          <section id="services" className="container mx-auto px-4 py-16" aria-labelledby="services-heading">
             <div className="text-center mb-16">
               <h2 id="services-heading" className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
               <p className="text-muted-foreground text-lg">What we do best</p>
@@ -125,7 +103,7 @@ export default function HomePage() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
-                <div className="p-8 h-full flex flex-col">
+                <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <Code2 className="w-8 h-8 text-primary" />
@@ -146,7 +124,7 @@ export default function HomePage() {
               </SpotlightCard>
               
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
-                <div className="p-8 h-full flex flex-col">
+                <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <Smartphone className="w-8 h-8 text-primary" />
@@ -167,7 +145,7 @@ export default function HomePage() {
               </SpotlightCard>
               
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
-                <div className="p-8 h-full flex flex-col">
+                <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <Brain className="w-8 h-8 text-primary" />
@@ -188,7 +166,7 @@ export default function HomePage() {
               </SpotlightCard>
               
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
-                <div className="p-8 h-full flex flex-col">
+                <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <Palette className="w-8 h-8 text-primary" />
@@ -209,7 +187,7 @@ export default function HomePage() {
               </SpotlightCard>
               
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
-                <div className="p-8 h-full flex flex-col">
+                <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <Cube className="w-8 h-8 text-primary" />
@@ -230,7 +208,7 @@ export default function HomePage() {
               </SpotlightCard>
               
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
-                <div className="p-8 h-full flex flex-col">
+                <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="p-3 rounded-2xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
                       <Workflow className="w-8 h-8 text-primary" />
@@ -255,7 +233,7 @@ export default function HomePage() {
 
         {/* Stats Section */}
         <AnimatedSection>
-          <section className="container mx-auto px-4 py-20" aria-labelledby="stats-heading">
+          <section id="stats" className="container mx-auto px-4 py-20" aria-labelledby="stats-heading">
             <div className="text-center mb-16">
               <h2 id="stats-heading" className="text-3xl md:text-4xl font-bold mb-4">By the numbers</h2>
               <p className="text-muted-foreground text-lg">Our focus is long-term value — measurable growth and satisfied clients</p>
@@ -372,9 +350,11 @@ export default function HomePage() {
               >
                 <div className="overflow-hidden rounded-2xl border bg-card group-hover:shadow-xl transition-all duration-300 group-hover:border-primary/50">
                   <div className="relative overflow-hidden">
-                    <img
+                    <Image
                       src={w.image || "/placeholder.svg"}
                       alt={w.title}
+                      width={400}
+                      height={400}
                       className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
