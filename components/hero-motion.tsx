@@ -4,7 +4,7 @@ import { Badge } from "./ui/badge"
 import { useTheme } from "next-themes"
 import { memo, lazy, Suspense } from "react"
 
-const Beams = lazy(() => import("@/components/backgrounds/beams"))
+const Beams = lazy(() => import("@/components/backgrounds/Beams"))
 
 const BeamsBg = memo(() => (
   <Beams
