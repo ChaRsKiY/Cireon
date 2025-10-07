@@ -130,8 +130,6 @@ function ViennaMarker() {
 }
 
 export default function Earth3D() {
-  const { theme } = useTheme()
-  const isDark = theme === 'dark'
   
   return (
     <motion.div

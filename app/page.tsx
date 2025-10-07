@@ -20,7 +20,6 @@ import CurvedLoop from "@/components/CurvedLoop"
 import SpotlightCard from "@/components/SpotlightCard"
 import { motion } from "framer-motion"
 import CountUp from "@/components/CountUp"
-import TiltedCard from "@/components/TiltedCard"
 
 const services = [
   { title: "Web development", icon: Code2, desc: "Next.js apps with strong UI, SEO and CWV." },
@@ -83,7 +82,7 @@ const works = [
     tag: ["Web", "Mobile"], 
     image: "/cnotes-app.png",
     description: "Web application for hairdressing salon with appointment booking and financial management system"
-  },
+  }
 ]
 
 const tags = ["All", "Web", "Mobile", "3D", "AI"] as const
@@ -96,13 +95,14 @@ export default function HomePage() {
     <>
       <SiteHeader />
       <PageTransition>
+        <main role="main">
         <HeroMotion />
 
         <Chatbot />
 
         {/* Hero Section with Animated Text */}
         <AnimatedSection>
-          <div className="px-4 py-20 text-center w-full flex justify-center items-center flex-col">
+          <section className="px-4 py-20 text-center w-full flex justify-center items-center flex-col" aria-labelledby="hero-heading">
               <CurvedLoop marqueeText="We help tech and business grow" className="w-full" />
 
                <ScrambleText radius={100}
@@ -112,14 +112,14 @@ export default function HomePage() {
                 >
                   Thoughtful design, solid architecture and expressive motion. Products that engage and perform.
                </ScrambleText>
-          </div>
+          </section>
         </AnimatedSection>
 
         {/* Services Grid with Modern Cards */}
         <AnimatedSection>
-          <div className="container mx-auto px-4 py-16">
+          <section className="container mx-auto px-4 py-16" aria-labelledby="services-heading">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+              <h2 id="services-heading" className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
               <p className="text-muted-foreground text-lg">What we do best</p>
             </div>
             
@@ -250,14 +250,14 @@ export default function HomePage() {
                 </div>
               </SpotlightCard>
             </div>
-          </div>
+          </section>
         </AnimatedSection>
 
         {/* Stats Section */}
         <AnimatedSection>
-          <div className="container mx-auto px-4 py-20">
+          <section className="container mx-auto px-4 py-20" aria-labelledby="stats-heading">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">By the numbers</h2>
+              <h2 id="stats-heading" className="text-3xl md:text-4xl font-bold mb-4">By the numbers</h2>
               <p className="text-muted-foreground text-lg">Our focus is long-term value — measurable growth and satisfied clients</p>
             </div>
             
@@ -314,12 +314,12 @@ export default function HomePage() {
                 <p className="text-muted-foreground">Average Response Time</p>
               </motion.div>
             </div>
-          </div>
+          </section>
         </AnimatedSection>
 
         {/* CTA Section */}
         <AnimatedSection>
-          <div className="container mx-auto px-4 py-20">
+          <section className="container mx-auto px-4 py-20" aria-labelledby="cta-heading">
             <div className="max-w-4xl mx-auto text-center">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -327,7 +327,7 @@ export default function HomePage() {
                 transition={{ duration: 0.8 }}
                 className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-3xl p-12 md:p-16"
               >
-                <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                <h2 id="cta-heading" className="text-3xl md:text-5xl font-bold mb-6">
                   Ready to build something amazing?
                 </h2>
                 <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -343,14 +343,14 @@ export default function HomePage() {
               </div>
               </motion.div>
             </div>
-          </div>
+          </section>
         </AnimatedSection>
 
         {/* Portfolio Section */}
         <AnimatedSection>
-          <div id="portfolio" className="container mx-auto px-4 py-20">
+          <section id="portfolio" className="container mx-auto px-4 py-20" aria-labelledby="portfolio-heading">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Our work</h2>
+              <h2 id="portfolio-heading" className="text-3xl md:text-4xl font-bold mb-4">Our work</h2>
               <p className="text-muted-foreground text-lg">Select a category to see relevant projects</p>
             </div>
             
@@ -412,28 +412,28 @@ export default function HomePage() {
               </motion.div>
               ))}
             </div>
-          </div>
+          </section>
         </AnimatedSection>
 
         <AnimatedSection>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">Industries</h3>
+          <section className="container mx-auto px-4 py-12 md:py-16" aria-labelledby="industries-section-heading">
+            <h3 id="industries-section-heading" className="text-xl md:text-2xl font-semibold mb-6">Industries</h3>
             <Industries />
-          </div>
+          </section>
         </AnimatedSection>
 
         <AnimatedSection>
-          <div className="container mx-auto px-4 py-12 md:py-16">
-            <h3 className="text-xl md:text-2xl font-semibold mb-6">FAQ</h3>
+          <section className="container mx-auto px-4 py-12 md:py-16" aria-labelledby="faq-section-heading">
+            <h3 id="faq-section-heading" className="text-xl md:text-2xl font-semibold mb-6">FAQ</h3>
             <FAQ />
-          </div>
+          </section>
         </AnimatedSection>
 
         <AnimatedSection>
-          <div id="contact" className="container mx-auto px-4 py-12 md:py-16">
+          <section id="contact" className="container mx-auto px-4 py-12 md:py-16" aria-labelledby="contact-section-heading">
             <div className="grid lg:grid-cols-2 gap-8">
               <div>
-                <h1 className="text-3xl md:text-4xl font-semibold">Contacts</h1>
+                <h1 id="contact-section-heading" className="text-3xl md:text-4xl font-semibold">Contact Us</h1>
                 <p className="text-muted-foreground mt-3">
                   Fill out the form — we'll respond within 1‑2 business days. Or write to me@cireon.dev
                 </p>
@@ -453,14 +453,15 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="rounded-xl border bg-card p-6 h-full flex flex-col">
-                <h2 className="font-medium mb-2">Write to us</h2>
+                <h2 className="font-medium mb-2">Send us a message</h2>
                 <ContactForm />
               </div>
             </div>
-          </div>
+          </section>
         </AnimatedSection>
 
         <SiteFooter />
+        </main>
       </PageTransition>
     </>
   )

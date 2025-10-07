@@ -1,3 +1,4 @@
+import Link from "next/link"
 import Logo from "./logo"
 
 export default function SiteFooter() {
@@ -18,24 +19,29 @@ export default function SiteFooter() {
             <p className="text-sm font-medium">Navigation</p>
             <ul className="text-sm text-muted-foreground grid gap-1">
               <li>
-                <a href="#services" className="hover:underline">
+                <Link href="#services" className="hover:underline">
                   Services
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#portfolio" className="hover:underline">
+                <Link href="#portfolio" className="hover:underline">
                   Portfolio
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#about" className="hover:underline">
+                <Link href="#about" className="hover:underline">
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#contact" className="hover:underline">
+                <Link href="#contact" className="hover:underline">
                   Contact
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="hover:underline">
+                  Privacy Policy
+                </Link>
               </li>
             </ul>
           </div>
@@ -43,19 +49,19 @@ export default function SiteFooter() {
             <p className="text-sm font-medium">Social</p>
             <ul className="text-sm text-muted-foreground grid gap-1">
               {/*<li>
-                <a href="https://github.com" className="hover:underline" target="_blank" rel="noreferrer">
+                <Link href="https://github.com" className="hover:underline" target="_blank" rel="noreferrer">
                   GitHub
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="https://linkedin.com" className="hover:underline" target="_blank" rel="noreferrer">
+                <Link href="https://linkedin.com" className="hover:underline" target="_blank" rel="noreferrer">
                   LinkedIn
-                </a>
+                </Link>
               </li>*/}
               <li>
-                <a href="mailto:me@cireon.dev" className="hover:underline">
+                <Link href="mailto:me@cireon.dev" className="hover:underline">
                   me@cireon.dev
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

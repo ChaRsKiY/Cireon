@@ -20,7 +20,7 @@ const BeamsBg = memo(() => (
 ))
 
 const BackgroundLoader = () => (
-  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 animate-pulse" />
+  <div className="absolute inset-0 bg-background" />
 )
 
 const HeroMotion = memo(() => {
