@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 
 export default function ModeToggle() {
   const { theme, setTheme } = useTheme()
-  const isDark = theme === "dark"
+  const isDark = theme === "dark" || theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches
 
   return (
     <Button variant="outline" size="icon" aria-label="Toggle theme" onClick={() => setTheme(isDark ? "light" : "dark")}>

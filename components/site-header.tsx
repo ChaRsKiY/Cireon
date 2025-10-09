@@ -12,10 +12,9 @@ import { motion, AnimatePresence } from "framer-motion"
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "#services", label: "Services" },
-  { href: "#stats", label: "About" },
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#services", label: "Services" },
+  { href: "/projects", label: "Projects" },
+  { href: "/#stats", label: "About" },
 ]
 
 export default function SiteHeader() {
@@ -35,7 +34,6 @@ export default function SiteHeader() {
         { id: "services", selector: "#services" },
         { id: "portfolio", selector: "#portfolio" },
         { id: "stats", selector: "#stats" },
-        { id: "contact", selector: "#contact" },
       ]
 
       const scrollPosition = window.scrollY + 200 
@@ -45,7 +43,6 @@ export default function SiteHeader() {
       let currentSection = "home"
 
       if (scrollPosition + windowHeight >= documentHeight - 100) {
-        currentSection = "contact"
       } else {
         for (let i = sections.length - 1; i >= 0; i--) {
           const section = sections[i]

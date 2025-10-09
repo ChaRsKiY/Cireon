@@ -3,6 +3,10 @@ import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
+import SiteHeader from '@/components/site-header'
+import PageTransition from '@/components/page-transition'
+import SiteFooter from '@/components/site-footer'
+import Chatbot from '@/components/chatbot'
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://cireon.dev'),
@@ -162,7 +166,12 @@ html {
       </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <PageTransition>
+            <SiteHeader />
+            <Chatbot />
+            {children}
+            <SiteFooter />
+          </PageTransition>
         </ThemeProvider>
       </body>
     </html>

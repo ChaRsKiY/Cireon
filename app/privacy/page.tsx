@@ -1,12 +1,6 @@
-import SiteHeader from "@/components/site-header"
-import SiteFooter from "@/components/site-footer"
-import PageTransition from "@/components/page-transition"
-
 const PrivacyPage = () => {
     return (
         <>
-            <SiteHeader />
-            <PageTransition>
                 <div className="px-[10%] pt-32 pb-24">
                     <h1 className="text-3xl md:text-4xl font-semibold">Privacy Policy</h1>
                     <p>Last updated: October 07, 2025</p>
@@ -240,8 +234,6 @@ const PrivacyPage = () => {
                     </ul>
                     <p><strong>Response Time:</strong> We will respond to your privacy-related inquiries within 30 days as required by GDPR.</p>
                 </div>
-            </PageTransition>
-            <SiteFooter />
         </>
     )
 }

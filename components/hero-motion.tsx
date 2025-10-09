@@ -29,7 +29,7 @@ const HeroMotion = memo(() => {
     <section className="relative w-full h-[100dvh] overflow-hidden">
       <div style={{ width: '100%', height: '100%', position: 'absolute' }}>
         <Suspense fallback={<BackgroundLoader />}>
-          {theme === "dark" ? <BeamsBg /> : null}
+          {theme === "dark" || theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches ? <BeamsBg /> : null}
         </Suspense>
       </div>
       <div className="absolute h-full w-full flex items-center justify-center px-6 pointer-events-none">

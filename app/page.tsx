@@ -1,8 +1,5 @@
 "use client"
 
-import SiteHeader from "@/components/site-header"
-import SiteFooter from "@/components/site-footer"
-import PageTransition from "@/components/page-transition"
 import AnimatedSection from "@/components/animated-section"
 import HeroMotion from "@/components/hero-motion"
 import ScrambleText from "@/components/ScrambledText"
@@ -10,7 +7,6 @@ import Industries from "@/components/sections/industries"
 import FAQ from "@/components/sections/faq"
 import Earth3D from "@/components/earth-3d"
 import ContactForm from "@/components/contact-form"
-import Chatbot from "@/components/chatbot"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
@@ -21,62 +17,40 @@ import SpotlightCard from "@/components/SpotlightCard"
 import { motion } from "framer-motion"
 import CountUp from "@/components/CountUp"
 import Image from "next/image"
-
-const works = [
-  { 
-    id: 1, 
-    title: "Gallery Slansky", 
-    tag: ["Web"], 
-    image: "/gallery-slansky.png",
-    description: "Gallery ecommerce website for Markus Slansky with modern design, animations and shop features",
-    link: "https://galerieslansky.com/"
-  },
-  { 
-    id: 2, 
-    title: "Cireon Studio", 
-    tag: ["Web", "AI", "3D"], 
-    image: "/cireon-studio.png",
-    description: "Digital studio landing page with modern design, animations and contact form integration"
-  },
-  { 
-    id: 3, 
-    title: "Kids Only", 
-    tag: ["Web"], 
-    image: "/kids-only-app.png",
-    description: "Newsletter subscription platform with full admin panel and advanced email template editor"
-  },
-  { 
-    id: 4, 
-    title: "Goldlagerhaus", 
-    tag: ["Web"], 
-    image: "/goldlagerhaus-site.png",
-    description: "Corporate website for Goldlagerhaus company with modern design and e-commerce features",
-    link: "https://goldlagerhaus.com"
-  },
-  
-  { 
-    id: 5, 
-    title: "CNotes", 
-    tag: ["Web", "Mobile"], 
-    image: "/cnotes-app.png",
-    description: "Web application for hairdressing salon with appointment booking and financial management system"
-  },
-]
+import { getProjects } from "@/lib/projects"
 
 const tags = ["All", "Web", "Mobile", "3D", "AI"] as const
 
 export default function HomePage() {
   const [activeTag, setActiveTag] = useState<(typeof tags)[number]>("All")
-  const filteredWorks = useMemo(() => works.filter((w) => (activeTag === "All" ? true : w.tag.includes(activeTag))), [activeTag])
+  const projects = getProjects()
+  
+  // Create tag mapping for projects
+  const getProjectTags = (project: any) => {
+    const tags: string[] = ["Web"]
+    if (project.techStack.includes("React Native") || project.techStack.includes("Mobile")) {
+      tags.push("Mobile")
+    }
+    if (project.techStack.includes("Three.js") || project.techStack.includes("3D")) {
+      tags.push("3D")
+    }
+    if (project.techStack.includes("OpenAI") || project.techStack.includes("AI")) {
+      tags.push("AI")
+    }
+    return tags
+  }
+  
+  const filteredWorks = useMemo(() => 
+    projects.filter((project) => {
+      if (activeTag === "All") return true
+      const projectTags = getProjectTags(project)
+      return projectTags.includes(activeTag)
+    }), [activeTag, projects])
 
   return (
     <>
-      <SiteHeader />
-      <PageTransition>
         <main role="main">
         <HeroMotion />
-
-        <Chatbot />
 
         {/* Hero Section with Animated Text */}
         <AnimatedSection>
@@ -340,57 +314,58 @@ export default function HomePage() {
               ))}
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-              {filteredWorks.map((w, index) => (
-                <motion.div
-                key={w.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group"
-              >
-                <div className="overflow-hidden rounded-2xl border bg-card group-hover:shadow-xl transition-all duration-300 group-hover:border-primary/50">
-                  <div className="relative overflow-hidden">
-                    <Image
-                      src={w.image || "/placeholder.svg"}
-                      alt={w.title}
-                      width={400}
-                      height={400}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="flex flex-wrap gap-2">
-                        {w.tag.map((tag) => (
-                          <Badge key={tag} variant="secondary">
-                            {tag}
-                          </Badge>
-                        ))}
+              {filteredWorks.map((project, index) => {
+                const projectTags = getProjectTags(project)
+                return (
+                  <motion.div
+                    key={project.slug}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="group"
+                  >
+                    <div className="overflow-hidden rounded-2xl border bg-card group-hover:shadow-xl transition-all duration-300 group-hover:border-primary/50">
+                      <div className="relative overflow-hidden">
+                        <Image
+                          src={project.coverImage || "/placeholder.svg"}
+                          alt={project.title}
+                          width={400}
+                          height={400}
+                          className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="flex flex-wrap gap-2">
+                            {projectTags.map((tag) => (
+                              <Badge key={tag} variant="secondary">
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="p-6 border-t border-border group-hover:border-primary/50 transition-colors">
+                        <div className="flex justify-between items-start mb-3">
+                          <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
+                          <Link 
+                            href={`/projects/${project.slug}`}
+                            className="text-primary hover:text-primary/80 transition-colors"
+                          >
+                            <motion.div
+                              whileHover={{ x: 5 }}
+                              className="flex items-center gap-1"
+                            >
+                              View project
+                              <span className="text-sm">→</span>
+                            </motion.div>
+                          </Link>
+                        </div>
+                        <p className="text-muted-foreground leading-relaxed">{project.subtitle || project.description}</p>
                       </div>
                     </div>
-                  </div>
-                  <div className="p-6 border-t border-border group-hover:border-primary/50 transition-colors">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{w.title}</h3>
-                      {w.link && (
-                        <Link 
-                          href={w.link} 
-                          className="text-primary hover:text-primary/80 transition-colors"
-                        >
-                          <motion.div
-                            whileHover={{ x: 5 }}
-                            className="flex items-center gap-1"
-                          >
-                            View project
-                            <span className="text-sm">→</span>
-                          </motion.div>
-                        </Link>
-                      )}
-                    </div>
-                    <p className="text-muted-foreground leading-relaxed">{w.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-              ))}
+                  </motion.div>
+                )
+              })}
             </div>
           </section>
         </AnimatedSection>
@@ -439,10 +414,7 @@ export default function HomePage() {
             </div>
           </section>
         </AnimatedSection>
-
-        <SiteFooter />
         </main>
-      </PageTransition>
     </>
   )
 }
