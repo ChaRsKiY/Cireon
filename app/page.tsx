@@ -7,6 +7,7 @@ import Industries from "@/components/sections/industries"
 import FAQ from "@/components/sections/faq"
 import Earth3D from "@/components/earth-3d"
 import ContactForm from "@/components/contact-form"
+import RivallSection from "@/components/sections/rivall-section"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
@@ -24,7 +25,7 @@ const tags = ["All", "Web", "Mobile", "3D", "AI"] as const
 export default function HomePage() {
   const [activeTag, setActiveTag] = useState<(typeof tags)[number]>("All")
   const projects = getProjects()
-  
+
   // Create tag mapping for projects
   const getProjectTags = (project: any) => {
     const tags: string[] = ["Web"]
@@ -39,8 +40,8 @@ export default function HomePage() {
     }
     return tags
   }
-  
-  const filteredWorks = useMemo(() => 
+
+  const filteredWorks = useMemo(() =>
     projects.filter((project) => {
       if (activeTag === "All") return true
       const projectTags = getProjectTags(project)
@@ -49,22 +50,27 @@ export default function HomePage() {
 
   return (
     <>
-        <main role="main">
+      <main role="main">
         <HeroMotion />
 
         {/* Hero Section with Animated Text */}
         <AnimatedSection>
           <section className="px-4 py-20 text-center w-full flex justify-center items-center flex-col" aria-labelledby="hero-heading">
-              <CurvedLoop marqueeText="We help tech and business grow" className="w-full" />
+            <CurvedLoop marqueeText="We help tech and business grow" className="w-full" />
 
-               <ScrambleText radius={100}
-                 duration={1.2}
-                 speed={0.5}
-                 scrambleChars={".:."} className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed"
-                >
-                  Thoughtful design, solid architecture and expressive motion. Products that engage and perform.
-               </ScrambleText>
+            <ScrambleText radius={100}
+              duration={1.2}
+              speed={0.5}
+              scrambleChars={".:."} className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed"
+            >
+              Thoughtful design, solid architecture and expressive motion. Products that engage and perform.
+            </ScrambleText>
           </section>
+        </AnimatedSection>
+
+        {/* Rivall Flagship Section */}
+        <AnimatedSection>
+          <RivallSection />
         </AnimatedSection>
 
         {/* Services Grid with Modern Cards */}
@@ -74,7 +80,7 @@ export default function HomePage() {
               <h2 id="services-heading" className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
               <p className="text-muted-foreground text-lg">What we do best</p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
                 <div className="p-6 h-full flex flex-col">
@@ -96,7 +102,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </SpotlightCard>
-              
+
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
                 <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
@@ -117,7 +123,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </SpotlightCard>
-              
+
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
                 <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
@@ -138,7 +144,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </SpotlightCard>
-              
+
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
                 <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
@@ -159,7 +165,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </SpotlightCard>
-              
+
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
                 <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
@@ -180,7 +186,7 @@ export default function HomePage() {
                   </div>
                 </div>
               </SpotlightCard>
-              
+
               <SpotlightCard className="custom-spotlight-card group" spotlightColor="var(--primary-alpha)">
                 <div className="p-6 h-full flex flex-col">
                   <div className="flex items-center gap-4 mb-6">
@@ -212,7 +218,7 @@ export default function HomePage() {
               <h2 id="stats-heading" className="text-3xl md:text-4xl font-bold mb-4">By the numbers</h2>
               <p className="text-muted-foreground text-lg">Our focus is long-term value — measurable growth and satisfied clients</p>
             </div>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -221,12 +227,12 @@ export default function HomePage() {
                 className="text-center"
               >
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                  <CountUp to={10} onStart={() => {}} onEnd={() => {}} />
+                  <CountUp to={10} onStart={() => { }} onEnd={() => { }} />
                   <span className="text-2xl">+</span>
                 </div>
                 <p className="text-muted-foreground">Projects Delivered</p>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -234,12 +240,12 @@ export default function HomePage() {
                 className="text-center"
               >
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                  <CountUp to={98} onStart={() => {}} onEnd={() => {}} />
+                  <CountUp to={98} onStart={() => { }} onEnd={() => { }} />
                   <span className="text-2xl">%</span>
                 </div>
                 <p className="text-muted-foreground">Client Satisfaction</p>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -247,12 +253,12 @@ export default function HomePage() {
                 className="text-center"
               >
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                  <CountUp to={5} onStart={() => {}} onEnd={() => {}} />
+                  <CountUp to={5} onStart={() => { }} onEnd={() => { }} />
                   <span className="text-2xl">+</span>
                 </div>
                 <p className="text-muted-foreground">Years Experience</p>
               </motion.div>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -260,7 +266,7 @@ export default function HomePage() {
                 className="text-center"
               >
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">
-                  <CountUp to={24} onStart={() => {}} onEnd={() => {}} />
+                  <CountUp to={24} onStart={() => { }} onEnd={() => { }} />
                   <span className="text-2xl">h</span>
                 </div>
                 <p className="text-muted-foreground">Average Response Time</p>
@@ -287,12 +293,12 @@ export default function HomePage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button asChild size="lg" className="text-lg px-8 py-6">
-                  <a href="#contact">Start a project</a>
-                </Button>
+                    <a href="#contact">Start a project</a>
+                  </Button>
                   <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6">
                     <a href="#contact">Schedule a call</a>
-                </Button>
-              </div>
+                  </Button>
+                </div>
               </motion.div>
             </div>
           </section>
@@ -305,7 +311,7 @@ export default function HomePage() {
               <h2 id="portfolio-heading" className="text-3xl md:text-4xl font-bold mb-4">Our work</h2>
               <p className="text-muted-foreground text-lg">Select a category to see relevant projects</p>
             </div>
-            
+
             <div className="flex flex-wrap justify-center gap-3 mb-12">
               {tags.map((t) => (
                 <Button key={t} onClick={() => setActiveTag(t)} variant={activeTag === t ? "default" : "outline"} size="lg">
@@ -347,7 +353,7 @@ export default function HomePage() {
                       <div className="p-6 border-t border-border group-hover:border-primary/50 transition-colors">
                         <div className="flex justify-between items-start mb-3">
                           <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{project.title}</h3>
-                          <Link 
+                          <Link
                             href={`/projects/${project.slug}`}
                             className="text-primary hover:text-primary/80 transition-colors"
                           >
@@ -414,7 +420,7 @@ export default function HomePage() {
             </div>
           </section>
         </AnimatedSection>
-        </main>
+      </main>
     </>
   )
 }

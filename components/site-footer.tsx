@@ -19,22 +19,22 @@ export default function SiteFooter() {
             <p className="text-sm font-medium">Navigation</p>
             <ul className="text-sm text-muted-foreground grid gap-1">
               <li>
-                <Link href="#services" className="hover:underline">
+                <Link href="/#services" className="hover:underline">
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="#portfolio" className="hover:underline">
+                <Link href="/#portfolio" className="hover:underline">
                   Portfolio
                 </Link>
               </li>
               <li>
-                <Link href="#stats" className="hover:underline">
+                <Link href="/#stats" className="hover:underline">
                   About
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="hover:underline">
+                <Link href="/#contact" className="hover:underline">
                   Contact
                 </Link>
               </li>

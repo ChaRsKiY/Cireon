@@ -1,5 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
+import RivallSection from "@/components/sections/rivall-section"
+import GalerieSlanskySection from "@/components/sections/galerie-slansky-section"
 import { getProjects } from "@/lib/projects"
 
 export const metadata = {
@@ -8,15 +10,25 @@ export const metadata = {
 }
 
 export default function ProjectsPage() {
-  const items = getProjects()
+  // Filter out the flagship projects from the general grid
+  const items = getProjects().filter(p => p.slug !== "rivall" && p.slug !== "gallery-slansky")
 
   return (
-      <main className="container mx-auto px-4 pb-24 pt-32">
+    <main className="container mx-auto px-4 pb-24 pt-32">
       <h1 className="text-3xl md:text-4xl font-bold mb-6">Projects</h1>
       <p className="text-muted-foreground mb-10 max-w-2xl">
         Collection of implemented projects: details, technologies, contribution and results.
       </p>
 
+      <div className="pb-24">
+        <RivallSection />
+      </div>
+
+      <div className="pb-24">
+        <GalerieSlanskySection />
+      </div>
+
+      <h2 className="text-2xl md:text-3xl font-bold mb-8">Other Projects</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {items.map((p) => (
           <Link
